@@ -1,0 +1,50 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+}
+
+plugins {
+    id 'java'
+    id 'java-library'
+    id 'io.freefair.lombok' version "8.10"
+    id 'org.springframework.boot' version '3.3.3'
+    id 'io.spring.dependency-management' version '1.1.6'
+}
+
+group 'net.bopsys'
+version '1.0-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    implementation 'dev.langchain4j:langchain4j:0.33.0'
+    implementation 'dev.langchain4j:langchain4j-ollama:0.33.0'
+
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.16.1'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.1'
+    implementation 'com.fasterxml.jackson.module:jackson-module-jsonSchema:2.16.1'
+
+    implementation 'org.jeasy:easy-random-core:4.0.0'
+
+    // TESTING
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.6.2'
+    testImplementation 'org.mockito:mockito-junit-jupiter:3.5.13'
+    testImplementation 'org.mockito:mockito-inline:3.5.13'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
